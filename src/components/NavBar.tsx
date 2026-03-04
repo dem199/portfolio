@@ -1,64 +1,185 @@
-import React, { useState } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
-import { Link } from "react-scroll";
-import ProfileImage from "../assets/profileImg.jpeg"; 
+import React, { useState, useEffect } from 'react';
 import { useDarkMode } from '../DarkModeContext';
-import { MdOutlineNightsStay, MdOutlineLightMode } from 'react-icons/md';
+import { NAV_LINKS } from '../constants/data';
 
 const NavBar: React.FC = () => {
-  const [nav, setNav] = useState<boolean>(false);
   const { isDarkMode, toggleTheme } = useDarkMode();
+  const [activeSection, setActiveSection] = useState('home');
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  const toggleDarkMode = () => {
-    toggleTheme();
-    setNav(false); // Close the mobile menu after toggling
-  }
+  // Track active section on scroll
+  useEffect(() => {
+    const handle = () => {
+      for (const id of [...NAV_LINKS].reverse()) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 120) {
+          setActiveSection(id);
+          break;
+        }
+      }
+    };
+    window.addEventListener('scroll', handle, { passive: true });
+    return () => window.removeEventListener('scroll', handle);
+  }, []);
 
-  const toggleMobileNav = () => {
-    setNav(!nav);
-  }
-
-  const links = [
-    { id: 1, link: 'home' },
-    { id: 2, link: 'about' },
-    { id: 3, link: 'project' },
-    { id: 4, link: 'contact' },
-  ];
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setMobileOpen(false);
+  };
 
   return (
-    <div className={`flex justify-between z-50 items-center w-full h-20 fixed px-4 ${isDarkMode ? 'bg-[#0F0A1E] text-[#F0F0F0]' : 'bg-[#F0F0F0] text-[#0F0A1E]'}`}>
-      <div className='flex items-center'>
-        <img src={ProfileImage} className='h-12 w-12 rounded-full mr-2' alt="Profile" />
-        <h1 className='cursor-pointer font-bold text-2xl'>Optimistic</h1>
+    <nav
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '0 clamp(1rem, 4vw, 3rem)',
+        height: 70,
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        background: isDarkMode ? 'rgba(10,6,18,0.85)' : 'rgba(248,245,255,0.85)',
+        borderBottom: '1px solid var(--border)',
+      }}
+    >
+      {/* Logo */}
+      <div
+        style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer' }}
+        onClick={() => scrollTo('home')}
+      >
+        <div
+          style={{
+            width: 38,
+            height: 38,
+            borderRadius: 10,
+            background: 'linear-gradient(135deg, #D434FE, #7B2FBE)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontFamily: "'Bebas Neue', cursive",
+            fontSize: '1.1rem',
+            color: '#fff',
+            letterSpacing: '0.05em',
+          }}
+        >
+          OO
+        </div>
+        <span style={{ fontFamily: "'Bebas Neue', cursive", fontSize: '1.3rem', letterSpacing: '0.08em' }}>
+          Opeyemi
+        </span>
       </div>
-      {/* Dark mode toggle */}
-      <div className="ml-2">
-        {isDarkMode ? (
-          <MdOutlineLightMode size={25} onClick={toggleDarkMode} className="cursor-pointer" />
-        ) : (
-          <MdOutlineNightsStay size={25} onClick={toggleDarkMode} className="cursor-pointer" />
-        )}
-      </div>
-      <ul className='hidden md:flex'>
-        {links.map(({ id, link }) => (
-          <li key={id} className='px-4 cursor-pointer capitalize font-medium text-white-500 hover:scale-105 duration-200'>
-            <Link to={link} smooth duration={500}>{link}</Link>
+
+      {/* Desktop nav */}
+      <ul style={{ display: 'flex', gap: '0.25rem', listStyle: 'none' }} className="hide-mobile">
+        {NAV_LINKS.map(link => (
+          <li key={link}>
+            <button
+              className={`nav-link ${activeSection === link ? 'active' : ''}`}
+              onClick={() => scrollTo(link)}
+            >
+              {link}
+            </button>
           </li>
         ))}
       </ul>
-      <div onClick={toggleMobileNav} className={`cursor-pointer z-10 md:hidden ${isDarkMode ? 'bg-[#150E28]' : 'bg-[#F0F0F0]'} text-${isDarkMode ? 'white' : '#150E28'}`}>
-        {nav ? <FaTimes size={25} className={`border rounded ${isDarkMode ? 'border-[#F0F0F0]' : 'border-[#150E28]'}`} /> : <FaBars size={25} className={`border rounded ${isDarkMode ? 'border-[#F0F0F0]' : 'border-[#150E28]'}`} />}
+
+      {/* Right controls */}
+      <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+        {/* Theme toggle */}
+        <button
+          onClick={toggleTheme}
+          style={{
+            background: 'var(--card-bg)',
+            border: '1px solid var(--border)',
+            borderRadius: 8,
+            padding: '0.4rem 0.65rem',
+            cursor: 'pointer',
+            color: 'var(--fg)',
+            fontSize: '1.1rem',
+            display: 'flex',
+            alignItems: 'center',
+            transition: 'all 0.2s',
+          }}
+          aria-label="Toggle theme"
+        >
+          {isDarkMode ? '☀️' : '🌙'}
+        </button>
+
+        {/* Hire me */}
+        <button className="btn-primary hide-mobile" style={{ padding: '0.5rem 1.2rem', fontSize: '0.85rem' }} onClick={() => scrollTo('contact')}>
+          Hire Me
+        </button>
+
+        {/* Hamburger */}
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          style={{
+            display: 'none',
+            background: 'none',
+            border: '1px solid var(--border)',
+            borderRadius: 8,
+            padding: '0.4rem 0.6rem',
+            cursor: 'pointer',
+            color: 'var(--fg)',
+            fontSize: '1.2rem',
+          }}
+          className="show-mobile"
+          aria-label="Toggle menu"
+        >
+          {mobileOpen ? '✕' : '☰'}
+        </button>
       </div>
-      {nav && (
-        <ul className={`flex flex-col justify-center items-start border rounded-md md:hidden py-3 my-10 ml-60 absolute top-10 left-0 w-full ${isDarkMode ? 'border-[#F0F0F0]' : 'border-[#150E28]'} h-60 ${isDarkMode ? 'bg-[#150E28]' : 'bg-[#F0F0F0]'} text-${isDarkMode ? '#F0F0F0' : '#150E28'}`}>
-          {links.map(({ id, link }) => (
-            <li key={id} className={`px-3 cursor-pointer capitalize py-3 text-lg font-medium rounded ${isDarkMode ? 'border-[#F0F0F0]' : 'border-[#150E28]'}`}>
-              <Link onClick={toggleMobileNav} to={link} smooth duration={500}>{link}</Link>
+
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <ul
+          style={{
+            position: 'absolute',
+            top: 70,
+            left: 0,
+            right: 0,
+            background: isDarkMode ? '#0A0612' : '#F8F5FF',
+            borderBottom: '1px solid var(--border)',
+            listStyle: 'none',
+            padding: '1rem 0',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.25rem',
+          }}
+        >
+          {NAV_LINKS.map(link => (
+            <li key={link}>
+              <button
+                className={`nav-link ${activeSection === link ? 'active' : ''}`}
+                style={{ width: '100%', textAlign: 'left', padding: '0.75rem 2rem', fontSize: '1rem' }}
+                onClick={() => scrollTo(link)}
+              >
+                {link}
+              </button>
             </li>
           ))}
+          <li style={{ padding: '0.75rem 2rem' }}>
+            <button className="btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={() => scrollTo('contact')}>
+              Hire Me
+            </button>
+          </li>
         </ul>
       )}
-    </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .hide-mobile { display: none !important; }
+          .show-mobile { display: flex !important; }
+        }
+        @media (min-width: 769px) {
+          .show-mobile { display: none !important; }
+        }
+      `}</style>
+    </nav>
   );
 };
 

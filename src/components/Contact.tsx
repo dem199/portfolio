@@ -1,54 +1,147 @@
-import React from 'react';
-import ContactImg from "../assets/contact-img.svg";
-import 'animate.css';
-import TrackVisibility from 'react-on-screen';
-import { useDarkMode } from '../DarkModeContext'; // custom hook
-
-// Defined the type for the visibility prop passed by TrackVisibility
-interface VisibilityProps {
-  isVisible: boolean;
-}
+import React, { useState } from 'react';
+import { SOCIAL_LINKS } from '../constants/data';
 
 const Contact: React.FC = () => {
-  const { isDarkMode } = useDarkMode(); // Accessing the isDarkMode state
+  const [formState, setFormState] = useState({ name: '', email: '', message: '' });
+  const [sent, setSent] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setFormState(prev => ({ ...prev, [e.target.name]: e.target.value }));
 
   return (
-    <section name="contact" className={`w-full pt-16 sm:pt-32 ${isDarkMode ? 'bg-[#150E28] text-white' : 'bg-[#F0F0F0] text-[#150E28]'}`}>
-      <div className='max-w-[1000px] mx-auto p-4 md:pl-20 flex flex-col justify-center items-start w-full'>
-        <span className={`text-4xl font-bold inline border-b-4 border-[#D434FE] whitespace-nowrap`}>Contact</span>
-        <span className='py-8'>
-          Feel free to reach out if you have any inquiries or need further
-          clarification. I would be delighted to schedule a video call to
-          discuss potential projects or brainstorm ideas together. You can submit the form below or 
-          <strong>
-            <a href="mailto:olatunbosunopeyemi186035@gmail.com?subject=Feedback&body=Message">
-              Send an Email
-            </a>
-          </strong>
-          or directly call or text me on 
-          <strong>
-            <a href="http://wa.me/+2348176779961"> Whatsapp </a>
-          </strong>
-          . I look forward to hearing from you!
-        </span>
-        <div className='sm:flex '>
-          <form className={`${isDarkMode ? 'bg-[#150E28] text-[#F0F0F0]' : 'bg-[#F0F0F0] text-[#150E28]'} flex flex-col w-full md:w-1/2`} action="https://getform.io/f/9441241e-c273-428d-8bd7-0838c318f786" method="post">
-            <input type="text" name='name' placeholder='Enter your name' className={`${isDarkMode ? 'border-[#F0F0F0]' : 'border-[#150E28]'} p-2 bg-transparent border-2 rounded-md focus:outline-none`} />
-            <input type="text" name='email' placeholder='Enter your email' className={`${isDarkMode ? 'border-[#F0F0F0]' : 'border-[#150E28]'} p-2 bg-transparent border-2 my-4 rounded-md focus:outline-none`} />
-            <textarea name="message" rows={10} placeholder='Enter your message' className={`${isDarkMode ? 'border-[#F0F0F0]' : 'border-[#150E28]'} p-2 bg-transparent border-2 my-4 rounded-md focus:outline-none`}></textarea>
-            <button className={`group text-${isDarkMode ? '#150E28' : '#F0F0F0'} focus:text-[#150E28] hover:scale-110 w-fit px-6 py-3 my-2 flex items-center hover:bg-white bg-gradient-to-b from-[#D434FE] to-[#903AFF] rounded-md cursor-pointer`}>Submit</button>
-          </form>
-          <TrackVisibility>
-            {({ isVisible }: VisibilityProps) => (
-              <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
-                <img src={ContactImg} className='mt-6 sm:mt-0' alt="Contact" />
+    <section
+      id="contact"
+      style={{ padding: 'clamp(4rem, 8vw, 8rem) clamp(1rem, 4vw, 3rem)' }}
+    >
+      <div style={{ maxWidth: 900, margin: '0 auto' }}>
+        {/* Heading */}
+        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <span className="section-label">// get in touch</span>
+          <h2 className="section-title">Let's Work Together</h2>
+          <p style={{ color: 'var(--muted)', maxWidth: 500, margin: '1rem auto 0' }}>
+            Have a project in mind or want to hire a Frontend Developer? Drop a message below or reach out directly.
+          </p>
+        </div>
+
+        <div
+          style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '3rem', alignItems: 'start' }}
+          className="grid-1-mobile"
+        >
+          {/* Contact links */}
+          <div>
+            {SOCIAL_LINKS.map(item => (
+              <a
+                key={item.label}
+                href={item.href}
+                target="_blank"
+                rel="noreferrer"
+                className="contact-card"
+              >
+                <span style={{ fontSize: '1.25rem', flexShrink: 0 }}>{item.icon}</span>
+                <div style={{ minWidth: 0 }}>
+                  <div style={{
+                    fontSize: '0.7rem',
+                    color: 'var(--muted)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.1em',
+                    marginBottom: '0.2rem',
+                  }}>
+                    {item.label}
+                  </div>
+                  <div style={{ fontSize: '0.85rem', fontWeight: 500, wordBreak: 'break-all' }}>
+                    {item.value}
+                  </div>
+                </div>
+              </a>
+            ))}
+
+            {/* Availability badge */}
+            <div style={{
+              marginTop: '1rem',
+              padding: '1rem',
+              background: 'rgba(34,197,94,0.08)',
+              border: '1px solid rgba(34,197,94,0.25)',
+              borderRadius: 12,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.75rem',
+            }}>
+              <span style={{
+                width: 10, height: 10, borderRadius: '50%',
+                background: '#22C55E',
+                display: 'inline-block',
+                flexShrink: 0,
+                boxShadow: '0 0 0 3px rgba(34,197,94,0.2)',
+              }} />
+              <span style={{ fontSize: '0.85rem', fontWeight: 500, color: '#22C55E' }}>
+                Available for freelance &amp; full-time roles
+              </span>
+            </div>
+          </div>
+
+          {/* Form */}
+          {sent ? (
+            <div style={{
+              textAlign: 'center',
+              padding: '3rem 2rem',
+              background: 'rgba(212,52,254,0.08)',
+              border: '1px solid rgba(212,52,254,0.3)',
+              borderRadius: 16,
+            }}>
+              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✅</div>
+              <h3 style={{ fontFamily: "'Bebas Neue', cursive", fontSize: '1.8rem', marginBottom: '0.5rem' }}>
+                Message Sent!
+              </h3>
+              <p style={{ color: 'var(--muted)' }}>
+                Thanks for reaching out. I'll get back to you within 24 hours.
+              </p>
+            </div>
+          ) : (
+            <form
+              action="https://getform.io/f/9441241e-c273-428d-8bd7-0838c318f786"
+              method="POST"
+              style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+              onSubmit={() => setSent(true)}
+            >
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }} className="grid-1-mobile">
+                <input
+                  className="form-input"
+                  type="text"
+                  name="name"
+                  placeholder="Your Name"
+                  required
+                  value={formState.name}
+                  onChange={handleChange}
+                />
+                <input
+                  className="form-input"
+                  type="email"
+                  name="email"
+                  placeholder="Email Address"
+                  required
+                  value={formState.email}
+                  onChange={handleChange}
+                />
               </div>
-            )}
-          </TrackVisibility>
+              <textarea
+                className="form-input"
+                name="message"
+                rows={6}
+                placeholder="Tell me about your project or opportunity..."
+                required
+                value={formState.message}
+                onChange={handleChange}
+                style={{ resize: 'vertical' }}
+              />
+              <button type="submit" className="btn-primary" style={{ alignSelf: 'flex-start' }}>
+                Send Message →
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </section>
   );
-}
+};
 
 export default Contact;

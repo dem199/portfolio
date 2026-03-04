@@ -1,66 +1,112 @@
 import React from 'react';
-import { FaReact, FaCss3, FaHtml5, FaBootstrap, FaStackOverflow, FaGitAlt, FaSass, FaFigma } from "react-icons/fa";
-import { TbBrandJavascript, TbBrandVscode, TbBrandTailwind, TbBrandFirebase, TbBrandNextjs, TbBrandTypescript } from "react-icons/tb";
-import { BiLogoNetlify } from "react-icons/bi";
-import 'animate.css';
-import TrackVisibility from 'react-on-screen';
-import { useDarkMode } from '../DarkModeContext';
+import { SKILLS, TOOLS, LEARNING } from '../constants/data';
+import { useInView } from '../hooks/useInView';
 
-interface Skill {
-  id: number;
-  icon: JSX.Element;
+interface SkillBarProps {
   name: string;
+  level: number;
+  color: string;
+  inView: boolean;
 }
 
-const Skills: React.FC = () => {
-  const { isDarkMode } = useDarkMode();
+const SkillBar: React.FC<SkillBarProps> = ({ name, level, color, inView }) => (
+  <div style={{ marginBottom: '1.2rem' }}>
+    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem' }}>
+      <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{name}</span>
+      <span style={{ fontSize: '0.85rem', color: 'var(--muted)' }}>{level}%</span>
+    </div>
+    <div style={{ background: 'var(--bar-bg)', borderRadius: 99, height: 8, overflow: 'hidden' }}>
+      <div
+        style={{
+          height: '100%',
+          borderRadius: 99,
+          background: `linear-gradient(90deg, ${color}88, ${color})`,
+          width: inView ? `${level}%` : '0%',
+          transition: 'width 1.2s cubic-bezier(0.4, 0, 0.2, 1)',
+        }}
+      />
+    </div>
+  </div>
+);
 
-  // Array of skill items with their corresponding icons and names
-  const links: Skill[] = [
-    { id: 1, icon: <TbBrandJavascript className='w-20 mx-auto mt-2' />, name: "Javascript" },
-    { id: 2, icon: <FaReact className='w-20 mx-auto mt-2' />, name: "React" },
-    { id: 3, icon: <FaCss3 className='w-20 mx-auto mt-2' />, name: "CSS3" },
-    { id: 4, icon: <FaHtml5 className='w-20 mx-auto mt-2' />, name: "HTML5" },
-    { id: 5, icon: <FaBootstrap className='w-20 mx-auto mt-2' />, name: "Bootstrap" },
-    { id: 6, icon: <TbBrandTailwind className='w-20 mx-auto mt-2' />, name: "Tailwind CSS" },
-    { id: 7, icon: <TbBrandFirebase className='w-20 mx-auto mt-2' />, name: "Firebase" },
-    { id: 8, icon: <BiLogoNetlify className='w-20 mx-auto mt-2' />, name: "Netlify" },
-    { id: 9, icon: <TbBrandNextjs className='w-20 mx-auto mt-2' />, name: "Next.js" },
-    { id: 10, icon: <TbBrandTypescript className='w-20 mx-auto mt-2' />, name: "Typescript" },
-    { id: 11, icon: <FaStackOverflow className='w-20 mx-auto mt-2' />, name: "Stack Overflow" },
-    { id: 12, icon: <FaGitAlt className='w-20 mx-auto mt-2' />, name: "Git" },
-    { id: 13, icon: <FaSass className='w-20 mx-auto mt-2' />, name: "SASS" },
-    { id: 14, icon: <FaFigma className='w-20 mx-auto mt-2' />, name: "Figma" },
-    { id: 15, icon: <TbBrandVscode className='w-20 mx-auto mt-2' />, name: "VSCode" },
-  ];
+const Skills: React.FC = () => {
+  const [ref, inView] = useInView(0.2);
 
   return (
-    <section className={`w-full pt-20 ${isDarkMode ? 'bg-[#150E28] text-white' : 'bg-[#F0F0F0] text-[#150E28]'}`}>
-      <div className='max-w-[1000px] p-4 mx-auto md:pl-20 flex flex-col justify-center w-full h-full'>
-        <TrackVisibility>
-          {({ isVisible }) => (
-            <div className={isVisible ? "animate__animated animate__backInUp" : ""}>
-              <h3 className={`text-4xl border-b-4 border-[#D434FE] font-bold inline`}>Skills and Tools</h3>
+    <section
+      id="skills"
+      style={{ padding: 'clamp(4rem, 8vw, 8rem) clamp(1rem, 4vw, 3rem)' }}
+    >
+      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+        {/* Heading */}
+        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <span className="section-label">// tech stack</span>
+          <h2 className="section-title">Skills &amp; Tools</h2>
+          <p style={{ color: 'var(--muted)', marginTop: '0.75rem', maxWidth: 460, margin: '0.75rem auto 0' }}>
+            Technologies I use daily to build fast, accessible, and beautiful products.
+          </p>
+        </div>
+
+        <div
+          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}
+          className="grid-1-mobile"
+        >
+          {/* Skill bars */}
+          <div ref={ref}>
+            {SKILLS.map(s => (
+              <SkillBar key={s.name} {...s} inView={inView} />
+            ))}
+          </div>
+
+          {/* Right column */}
+          <div>
+            <h3 style={{ fontWeight: 600, marginBottom: '1.25rem', fontSize: '1.05rem' }}>
+              Tools &amp; Technologies
+            </h3>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', marginBottom: '2rem' }}>
+              {TOOLS.map(t => (
+                <span key={t} className="tool-chip">{t}</span>
+              ))}
             </div>
-          )}
-        </TrackVisibility>
-        <TrackVisibility>
-          {({ isVisible }) => (
-            <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
-              <div className='w-full grid grid-cols-2 sm:grid-cols-4 gap-4 text-center py-8'>
-                {links.map(({ id, icon, name }) => (
-                  <div key={id} className={`shadow-md shadow-[#D434FE] hover:scale-110 duration-500`}>
-                    {icon}
-                    <p className='my-4'>{name}</p>
-                  </div>
-                ))}
-              </div>
+
+            {/* Currently learning */}
+            <div
+              style={{
+                padding: '1.5rem',
+                background: 'var(--card-bg)',
+                border: '1px solid var(--border)',
+                borderRadius: 16,
+              }}
+            >
+              <span
+                className="section-label"
+                style={{ marginBottom: '1rem', display: 'block' }}
+              >
+                // currently learning
+              </span>
+              {LEARNING.map(item => (
+                <div
+                  key={item}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.6rem',
+                    padding: '0.6rem 0',
+                    borderBottom: '1px solid var(--border)',
+                    fontSize: '0.9rem',
+                    color: 'var(--muted)',
+                  }}
+                >
+                  <span style={{ color: '#D434FE', fontWeight: 700 }}>→</span>
+                  {item}
+                </div>
+              ))}
             </div>
-          )}
-        </TrackVisibility>
+          </div>
+        </div>
       </div>
     </section>
   );
-}
+};
 
 export default Skills;
