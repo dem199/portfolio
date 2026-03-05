@@ -43,7 +43,7 @@ const About: React.FC = () => {
             I'm a driven{' '}
             <strong style={{ color: 'var(--fg)' }}>frontend &amp; React developer</strong>{' '}
             based in Lagos, Nigeria. I craft exceptional user interfaces using modern tools
-            and coding practices — turning designs into fast, accessible, delightful experiences.
+            and coding practices, turning designs into fast, accessible, delightful experiences.
           </p>
           <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1.25rem' }}>
             With a keen interest in{' '}

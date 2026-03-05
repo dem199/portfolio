@@ -153,7 +153,7 @@ const Footer: React.FC = () => {
               color: '#D434FE',
             }}
           >
-            {'<'} Built with React + Tailwind + ❤️ {' />'}
+            {'<'} Built with React + Tailwind  {' />'}
           </span>
         </div>
       </div>
