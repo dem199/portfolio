@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ArrowUpIcon } from './Icons';
 
 const BackToTop: React.FC = () => {
   const [visible, setVisible] = useState(false);
@@ -13,8 +14,7 @@ const BackToTop: React.FC = () => {
 
   return (
     <button
-      onClick={() => document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' })}
-      className="pulse-glow"
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       aria-label="Back to top"
       style={{
         position: 'fixed',
@@ -23,22 +23,21 @@ const BackToTop: React.FC = () => {
         zIndex: 999,
         width: 48,
         height: 48,
-        borderRadius: 12,
+        borderRadius: '50%',
         background: 'linear-gradient(135deg, #D434FE, #7B2FBE)',
-        color: '#fff',
         border: 'none',
         cursor: 'pointer',
-        fontSize: '1.2rem',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        boxShadow: '0 8px 30px rgba(212,52,254,0.35)',
+        boxShadow: '0 4px 20px rgba(212,52,254,0.5)',
+        animation: 'pulseGlow 2s ease-in-out infinite',
         transition: 'transform 0.2s',
       }}
-      onMouseEnter={e => (e.currentTarget.style.transform = 'translateY(-3px)')}
-      onMouseLeave={e => (e.currentTarget.style.transform = 'translateY(0)')}
+      onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.12)')}
+      onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
     >
-      ↑
+      <ArrowUpIcon size={20} color="#fff" />
     </button>
   );
 };

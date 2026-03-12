@@ -1,36 +1,23 @@
 {
   "compilerOptions": {
-    /* Language and Environment */
-    "target": "es2016" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ] /* Specify a set of bundled library declaration files that describe the target runtime environment. */,
-    "jsx": "react-jsx" /* Specify what JSX code is generated. */,
-
-    /* Modules */
-    "module": "commonjs" /* Specify what module code is generated. */,
-    "moduleResolution": "node" /* Specify how TypeScript looks up a file from a given module specifier. */,
-    "resolveJsonModule": true /* Enable importing .json files. */,
-    "allowSyntheticDefaultImports": true /* Allow 'import x from y' when a module doesn't have a default export. */,
-    "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,
-    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
-
-    /* Type Checking */
-    "strict": true /* Enable all strict type-checking options. */,
-    "skipLibCheck": true /* Skip type checking all .d.ts files. */,
-
-    /* Paths */
-    "baseUrl": "./" /* Specify the base directory to resolve non-relative module names. */,
+    "target": "ES2020",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["vite/client"],
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "baseUrl": "./",
     "paths": {
-      "@components/*": ["src/components/*"] /* Example path alias */,
+      "@components/*": ["src/components/*"],
       "@utils/*": ["src/utils/*"]
     }
   },
-  "include": ["src"] /* Specify the folders to include in the project. */,
-  "exclude": [
-    "node_modules",
-    "dist"
-  ] /* Specify the folders to exclude from the project. */
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }
