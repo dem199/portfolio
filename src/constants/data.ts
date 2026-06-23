@@ -10,35 +10,46 @@ export interface Project {
   live: string;
   desc: string;
   tech: string[];
+  image: string;
 }
+
+const OxymonImage = new URL('../assets/oxymon.png', import.meta.url).href;
+const PsalmsAliveImage = new URL('../assets/psalms-alive.png', import.meta.url).href;
+const RegalCravingsImage = new URL('../assets/regal-cravings.PNG', import.meta.url).href;
+const VanCruiseImage = new URL('../assets/vancruise.PNG', import.meta.url).href;
+const OrunSPFImage = new URL('../assets/orun-spf.PNG', import.meta.url).href;
+const KoinnestImage = new URL('../assets/koinnest.PNG', import.meta.url).href;
 
 export const PROJECTS: Project[] = [
   {
     id: 1,
+    name: 'Oxymon',
+    tag: 'Fintech',
+    github: 'Private Repository',
+    live: 'https://www.oxymon.co/',
+    desc: 'A modern finance platform that helps users save, borrow, and manage money with an intuitive interface and fair interest rates.',
+    tech: ['React', 'Next.js', 'TypeScript'],
+    image: OxymonImage,
+  },
+  {
+    id: 2,
+    name: 'Psalms Alive',
+    tag: 'Faith Platform',
+    github: 'Private Repository',
+    live: 'https://www.psalmsalive.com/',
+    desc: 'A storytelling platform that brings the Psalms to life with visual devotionals, dramatic video episodes, and relatable scripture narratives.',
+    tech: ['React', 'Next.js', 'TypeScript'],
+    image: PsalmsAliveImage,
+  },
+  {
+    id: 3,
     name: 'Regal Cravings',
     tag: 'Food App',
     github: 'https://github.com/dem199/Regal-Cravings',
     live: 'https://regal-cravings.netlify.app/',
     desc: 'A full-featured food ordering app. Browse menus, add to cart, and get your cravings delivered to your doorstep.',
     tech: ['React', 'CSS', 'Firebase'],
-  },
-  {
-    id: 2,
-    name: 'Sales Monitorr',
-    tag: 'Dashboard',
-    github: 'https://github.com/dem199/sales-dashboard-pro',
-    live: 'https://sales-monitorr.netlify.app/',
-    desc: 'A professional sales analytics dashboard with real-time charts, KPI tracking, and an intuitive reporting interface.',
-    tech: ['React', 'Recharts', 'Tailwind'],
-  },
-  {
-    id: 3,
-    name: 'Koinnest',
-    tag: 'Fintech',
-    github: 'https://github.com/dem199/koinnest',
-    live: 'https://koinnest.netlify.app/',
-    desc: 'A fintech platform for seamless digital payments and crypto tracking. Built for modern finance.',
-    tech: ['React', 'TypeScript', 'Firebase'],
+    image: RegalCravingsImage,
   },
   {
     id: 4,
@@ -48,33 +59,27 @@ export const PROJECTS: Project[] = [
     live: 'https://vancruise.netlify.app/',
     desc: 'Airbnb-style van rental platform for road-trippers, with browsing, filtering, and host dashboards.',
     tech: ['React Router', 'Firebase', 'CSS'],
+    image: VanCruiseImage,
   },
   {
     id: 5,
-    name: 'Speed Typing Game',
-    tag: 'Game',
-    github: 'https://github.com/dem199/Speed-typing-game',
-    live: 'https://dem199.github.io/Speed-typing-game',
-    desc: 'Race the clock to type as many words as possible. Real-time tracking, countdown timer, and final score.',
-    tech: ['JavaScript', 'HTML', 'CSS'],
+    name: 'Orun SPF',
+    tag: 'Skincare Site',
+    github: 'Private Repository',
+    live: 'https://www.orunspf.com/',
+    desc: 'A product site for an SPF 50+ moisturizer that delivers broad-spectrum UV protection, lightweight hydration, and fast-absorbing coverage.',
+    tech: ['React', 'Next.js', 'TypeScript'],
+    image: OrunSPFImage,
   },
   {
     id: 6,
-    name: 'Movie Watchlist',
-    tag: 'React App',
-    github: 'https://github.com/dem199/Movie-watchlist',
-    live: 'https://my-movie-search-watchlist.netlify.app',
-    desc: 'Save and manage your personal watchlist with detailed info, star ratings, and search functionality.',
-    tech: ['React', 'REST API', 'Netlify'],
-  },
-  {
-    id: 7,
-    name: 'Tenzies Game',
-    tag: 'Game',
-    github: 'https://github.com/dem199/Tenzies-game',
-    live: 'https://tenzies-game-optimistic.netlify.app',
-    desc: 'Classic dice game in React. Hold matching dice and roll the rest until all ten show the same number.',
-    tech: ['React', 'useState', 'CSS'],
+    name: 'Koinnest',
+    tag: 'Fintech',
+    github: 'https://github.com/dem199/koinnest',
+    live: 'https://koinnest.netlify.app/',
+    desc: 'A fintech platform for seamless digital payments and crypto tracking. Built for modern finance.',
+    tech: ['React', 'TypeScript', 'Firebase'],
+    image: KoinnestImage,
   },
 ];
 

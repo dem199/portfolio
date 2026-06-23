@@ -56,6 +56,15 @@ const ProjectCard: React.FC<Props> = ({ project, index }) => {
           cursor: 'default',
         }}
       >
+        {project.image && (
+          <div style={{ overflow: 'hidden', borderRadius: '1rem', minHeight: 180, background: 'var(--card-bg)' }}>
+            <img
+              src={project.image}
+              alt={`${project.name} landing page screenshot`}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+          </div>
+        )}
         {/* Top row — tag + links */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span style={{

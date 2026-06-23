@@ -18,7 +18,7 @@ const Projects: React.FC = () => {
           <span className="section-label">// portfolio</span>
           <h2 className="section-title">Featured Projects</h2>
           <p style={{ color: 'var(--muted)', maxWidth: 500, margin: '1rem auto 0' }}>
-            Every project includes a live demo and source code link. Built with modern React and creative problem-solving.
+            Each project includes a landing page screenshot, live demo, and source code link. Built with modern React and creative problem-solving.
           </p>
         </div>
 
