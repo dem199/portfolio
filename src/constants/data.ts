@@ -13,8 +13,8 @@ export interface Project {
   image: string;
 }
 
-const OxymonImage = new URL('../assets/oxymon.png', import.meta.url).href;
-const PsalmsAliveImage = new URL('../assets/psalms-alive.png', import.meta.url).href;
+const OxymonImage = new URL('../assets/oxymon.PNG', import.meta.url).href;
+const PsalmsAliveImage = new URL('../assets/Psalms-alive.PNG', import.meta.url).href;
 const RegalCravingsImage = new URL('../assets/regal-cravings.PNG', import.meta.url).href;
 const VanCruiseImage = new URL('../assets/vancruise.PNG', import.meta.url).href;
 const OrunSPFImage = new URL('../assets/orun-spf.PNG', import.meta.url).href;
