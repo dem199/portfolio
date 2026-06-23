@@ -65,8 +65,36 @@ const ContactIllustration: React.FC = () => {
 const Contact: React.FC = () => {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setFormState(prev => ({ ...prev, [e.target.name]: e.target.value }));
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setError(null);
+
+    const formData = new FormData(e.currentTarget);
+
+    try {
+      const response = await fetch('https://getform.io/f/9441241e-c273-428d-8bd7-0838c318f786', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Submission failed');
+      }
+
+      setSent(true);
+      setFormState({ name: '', email: '', message: '' });
+    } catch (err) {
+      setError('Unable to send message. Please try again later or use a direct contact link.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <section id="contact" style={{ padding: 'clamp(4rem, 8vw, 8rem) clamp(1rem, 4vw, 3rem)' }}>
@@ -109,12 +137,21 @@ const Contact: React.FC = () => {
                 <p style={{ color: 'var(--muted)' }}>Thanks for reaching out. I'll get back to you within 24 hours.</p>
               </div>
             ) : (
-              <form action="https://getform.io/f/9441241e-c273-428d-8bd7-0838c318f786" method="POST"
-                style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} onSubmit={() => setSent(true)}>
+              <form
+                onSubmit={handleSubmit}
+                style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+              >
                 <input className="form-input" type="text" name="name" placeholder="Your Name" required value={formState.name} onChange={handleChange} />
                 <input className="form-input" type="email" name="email" placeholder="Email Address" required value={formState.email} onChange={handleChange} />
                 <textarea className="form-input" name="message" rows={5} placeholder="Tell me about your project..." required value={formState.message} onChange={handleChange} style={{ resize: 'vertical' }} />
-                <button type="submit" className="btn-primary" style={{ alignSelf: 'flex-start' }}>Send Message →</button>
+                {error && (
+                  <div style={{ color: '#F87171', fontSize: '0.95rem', marginTop: '-0.5rem' }}>
+                    {error}
+                  </div>
+                )}
+                <button type="submit" className="btn-primary" style={{ alignSelf: 'flex-start' }} disabled={submitting}>
+                  {submitting ? 'Sending...' : 'Send Message →'}
+                </button>
               </form>
             )}
           </div>
