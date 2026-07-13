@@ -19,6 +19,7 @@ const RegalCravingsImage = new URL('../assets/regal-cravings.PNG', import.meta.u
 const VanCruiseImage = new URL('../assets/vancruise.PNG', import.meta.url).href;
 const OrunSPFImage = new URL('../assets/orun-spf.PNG', import.meta.url).href;
 const KoinnestImage = new URL('../assets/koinnest.PNG', import.meta.url).href;
+const RollinTechnologyImage = new URL('../assets/rollin-technology.PNG', import.meta.url).href;
 
 export const PROJECTS: Project[] = [
   {
@@ -41,8 +42,18 @@ export const PROJECTS: Project[] = [
     tech: ['React', 'Next.js', 'TypeScript'],
     image: PsalmsAliveImage,
   },
-  {
+     {
     id: 3,
+    name: 'Rollin Technology',
+    tag: 'Electronics Store',
+    github: 'Private Repository',
+    live: 'https://rollin-technology.vercel.app/',
+    desc: 'Rollin is a gadget seller, it helps individuals, businesses, schools, churches, NGOs and government organizations acquire reliable technology products backed by expert support and warranty protection.',
+    tech: ['React', 'TypeScript', 'Woocommerce, Wordpress, GraphQL'],
+    image: RollinTechnologyImage,
+  },
+  {
+    id: 4,
     name: 'Regal Cravings',
     tag: 'Food App',
     github: 'https://github.com/dem199/Regal-Cravings',
@@ -52,7 +63,7 @@ export const PROJECTS: Project[] = [
     image: RegalCravingsImage,
   },
   {
-    id: 4,
+    id: 5,
     name: 'VanCruise',
     tag: 'Full App',
     github: 'https://github.com/dem199/vancruise',
@@ -62,7 +73,7 @@ export const PROJECTS: Project[] = [
     image: VanCruiseImage,
   },
   {
-    id: 5,
+    id: 6,
     name: 'Orun SPF',
     tag: 'Skincare Site',
     github: 'Private Repository',
@@ -72,7 +83,7 @@ export const PROJECTS: Project[] = [
     image: OrunSPFImage,
   },
   {
-    id: 6,
+    id: 7,
     name: 'Koinnest',
     tag: 'Fintech',
     github: 'https://github.com/dem199/koinnest',
@@ -81,6 +92,7 @@ export const PROJECTS: Project[] = [
     tech: ['React', 'TypeScript', 'Firebase'],
     image: KoinnestImage,
   },
+    
 ];
 
 // ── SKILLS (shown as progress bars) ──────────────────────────────────────────
