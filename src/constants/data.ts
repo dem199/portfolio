@@ -39,7 +39,7 @@ export const PROJECTS: Project[] = [
     github: 'Private Repository',
     live: 'https://www.psalmsalive.com/',
     desc: 'A storytelling platform that brings the Psalms to life with visual devotionals, dramatic video episodes, and relatable scripture narratives.',
-    tech: ['React', 'Next.js', 'TypeScript'],
+    tech: ['React', 'Next.js', 'TypeScript', 'Wordpress', 'GraphQL'],
     image: PsalmsAliveImage,
   },
      {
@@ -49,7 +49,7 @@ export const PROJECTS: Project[] = [
     github: 'Private Repository',
     live: 'https://rollin-technology.vercel.app/',
     desc: 'Rollin is a gadget seller, it helps individuals, businesses, schools, churches, NGOs and government organizations acquire reliable technology products backed by expert support and warranty protection.',
-    tech: ['React', 'TypeScript', 'Woocommerce, Wordpress, GraphQL'],
+    tech: ['React', 'TypeScript', 'Next.js', 'Woocommerce', 'Wordpress', 'GraphQL'],
     image: RollinTechnologyImage,
   },
   {
