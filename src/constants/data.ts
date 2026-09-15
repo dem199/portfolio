@@ -47,7 +47,7 @@ export const PROJECTS: Project[] = [
     name: 'Rollin Technology',
     tag: 'Electronics Store',
     github: 'Private Repository',
-    live: 'https://rollin-technology.vercel.app/',
+    live: 'https://rollin.ng/',
     desc: 'Rollin is a gadget seller, it helps individuals, businesses, schools, churches, NGOs and government organizations acquire reliable technology products backed by expert support and warranty protection.',
     tech: ['React', 'TypeScript', 'Next.js', 'Woocommerce', 'Wordpress', 'GraphQL'],
     image: RollinTechnologyImage,
