@@ -23,7 +23,7 @@ const INFO_CARDS = [
   {
     icon: <RocketIcon size={22} color="#D434FE" />,
     label: 'FOCUS',
-    value: 'Frontend & React',
+    value: 'Frontend & Backend',
   },
 ];
 
@@ -111,7 +111,7 @@ const About: React.FC = () => {
                   fontFamily: "'JetBrains Mono', monospace",
                   boxShadow: '0 4px 20px rgba(212,52,254,0.4)',
                 }}>
-                  Frontend Dev
+                  Software Dev
                 </div>
               </div>
             </div>
@@ -120,7 +120,7 @@ const About: React.FC = () => {
           {/* RIGHT — text + info cards (screenshot 2 layout) */}
           <div>
             <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1rem', fontSize: '1rem' }}>
-              I'm a driven <strong style={{ color: 'var(--fg)' }}>Frontend / React Developer</strong> based
+              I'm a driven <strong style={{ color: 'var(--fg)' }}>Software Developer</strong> based
               in Lagos, Nigeria. I utilise modern coding practices to create exceptional user interfaces that
               are both beautiful and performant.
             </p>

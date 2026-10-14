@@ -134,6 +134,8 @@ export const TOOLS = [
   'RESTful APIs',
   'MongoDB',
   'MySQL',
+  'PHP',
+  'Laravel',
   'Supabase',
   // WordPress ecosystem
   'WordPress',
@@ -208,7 +210,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
 
 // ── TYPEWRITER WORDS ──────────────────────────────────────────────────────────
 export const TYPE_WORDS = [
-  'Frontend Developer',
+  'Database Engineer',
   'React Specialist',
   'Software Engineer',
   'UI Craftsman',
